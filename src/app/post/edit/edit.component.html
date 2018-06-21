@@ -1,0 +1,14 @@
+
+
+<form (click)="updatePost()" >
+  <div class="form-group">
+    <label for="Title">Title</label>
+  <input type="text" name="title" placeholder="post title" class="form-control" [(ngModel)]="post.title"/>
+</div>
+<div class="form-group">
+    <label for="Description">Description</label>
+  <input type="text" name="description" placeholder="post description" class="form-control" [(ngModel)]="post.description"/>
+</div>
+<button type="button" name="button" (click)="goBack()" >Go back</button>
+<button type="submit" name="save" >Save</button>
+</form>

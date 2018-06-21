@@ -1,0 +1,54 @@
+
+
+<div> 
+  <div class="panel panel-primary" *ngFor="let post of pPosts">
+    <div class="panel-body">
+      Title: <a [routerLink]="['/user-post/',post._id]">   {{post.title}}</a>
+    </div>
+    <div class="panel-body">
+    Description: {{post.description}}
+    </div>
+    <div class="panel-footer">
+        
+    
+      <!-- <button *ngIf="!edPost" (click)="editForm()"type="button" name="button">Edit</button>-->
+       
+      <a [routerLink]="['/edit-post/',post._id]"><button type="button" name="button">Edit</button></a>
+      <button name="button"(click)="deletePost(post._id)">Delete</button> 
+      <!-- <a [routerLink]="['/delete-post/',post._id]"><button type="button" name="button">Delete</button></a> -->
+     <div class="dropdown">
+      <button type="button" name="button" (click)=likePost(post._id)>
+        <span class="glyphicon glyphicon-thumbs-up">&nbsp;</span>Likes:{{post.likes}}
+      </button> 
+      <div class="dropdown-content">
+        <a [routerLink]="['/user/',liker]" *ngFor="let liker of post.likedBy">{{liker}}</a>
+        
+      </div> 
+     </div>
+     <div class="dropdown">
+        <button type="button" name="button" (click)=dislikePost(post._id)>
+          <span class="glyphicon glyphicon-thumbs-down">&nbsp;</span> Dislikes:{{post.dislikes}}
+        </button> 
+        <div class="dropdown-content">
+        <a [routerLink]="['/user/',disliker]" *ngFor="let disliker of post.dislikedBy">{{disliker}}</a>
+     
+        </div> 
+       </div>
+    </div>
+    {{post.comments[0].comment}}
+    <ul class="list-group">
+      <li class="list-group-item">
+        <button type="button" name="button" (click)="draftComment(post._id)">Post Comment</button>
+        <br/> 
+        
+      <div *ngIf="newComment.indexOf(post._id)>-1">
+        <form [formGroup]="commentForm">
+          <textarea name="comment" rows="10" cols="10" class="form-control" formControlName="comment"></textarea> 
+          <button type="button" name="button" (click)="postComment(post._id)">Submit</button>
+        </form> 
+        </div>
+     
+       </li>
+    </ul>
+  </div>
+  </div> 
